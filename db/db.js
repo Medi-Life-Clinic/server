@@ -24,15 +24,6 @@ try {
   console.log(error);
 }
 
-// Create Mongoose Schema for user data
-const userSchema = new mongoose.Schema({
-  name: 'String',
-  email: 'String', // add unique: true at some point
-  password: 'String'
-});
-
-// Create Mongoose Model for user data
-const User = mongoose.model('User', userSchema);
 
 // Export database connection and user model
-export { dbClose, User };
+export { dbClose };
