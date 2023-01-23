@@ -1,6 +1,6 @@
-import { UserModel, dbClose } from "./db";
+import { User, dbClose } from "./db.js";
 
-await UserModel.deleteMany();
+await User.deleteMany();
 console.log("All users deleted");
 
 const users = [
@@ -21,7 +21,7 @@ const users = [
   },
 ];
 
-await UserModel.insertMany(users);
+await User.insertMany(users);
 console.log("All users added");
 
 dbClose();

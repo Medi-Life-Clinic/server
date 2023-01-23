@@ -14,9 +14,9 @@ async function dbClose() {
 // Connect to database using Mongoose
 
 try {
-  const m = await mongoose.connect(process.env.MONGO_DB_URL);
+  const m = await mongoose.connect(process.env.MONGODB_URL);
   console.log(
-    m.connection.resyState === 1
+    m.connection.readyState === 1
       ? "Database connection established"
       : "Database connection failed"
   );
@@ -26,14 +26,13 @@ try {
 
 // Create Mongoose Schema for user data
 const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String,
+  name: 'String',
+  email: 'String', // add unique: true at some point
+  password: 'String'
 });
 
 // Create Mongoose Model for user data
-const UserModel = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
 // Export database connection and user model
-export { dbClose, UserModel };
-
+export { dbClose, User };

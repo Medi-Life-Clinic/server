@@ -8,4 +8,7 @@ app.get("/", (request, response) =>
   response.send({ info: "Medi-Life Clinic API" })
 );
 
+
+app.use('/users', )
+
 export default app;
