@@ -36,3 +36,4 @@ const UserModel = mongoose.model("User", userSchema);
 
 // Export database connection and user model
 export { dbClose, UserModel };
+
