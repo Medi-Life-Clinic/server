@@ -4,17 +4,22 @@ import userRoute from "./routes/user_routes.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+// Configuration
 dotenv.config();
 mongoose.set("strictQuery", true);
 
+// Middleware
 app.use(express.json());
 
+// URI for user routes
 app.use("/api/user", userRoute);
 
+// Default route
 app.get("/", (request, response) =>
   response.send({ info: "Medi-Life Clinic API" })
 );
 
+// Connect to database using Mongoose
 try {
   const m = await mongoose.connect(process.env.MONGODB_URL);
   console.log(
@@ -25,5 +30,11 @@ try {
 } catch (error) {
   console.log(error);
 }
+
+const port = process.env.PORT || 4001;
+
+app.listen(port, () =>
+  console.log(`App running on port @ http://localhost:${port}`)
+);
 
 export default app;

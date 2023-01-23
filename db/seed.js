@@ -2,7 +2,6 @@ import { dbClose } from "./db.js";
 // import bcrypt from "bcryptjs";
 import userModel from "../models/userModel.js";
 
-
 await userModel.deleteMany();
 console.log("All users deleted");
 
