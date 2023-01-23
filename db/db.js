@@ -24,6 +24,5 @@ try {
   console.log(error);
 }
 
-
 // Export database connection and user model
 export { dbClose };

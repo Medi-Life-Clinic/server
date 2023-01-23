@@ -1,6 +1,9 @@
-import { User, dbClose } from "./db.js";
+import { dbClose } from "./db.js";
+// import bcrypt from "bcryptjs";
+import userModel from "../models/userModel.js";
 
-await User.deleteMany();
+
+await userModel.deleteMany();
 console.log("All users deleted");
 
 const users = [
@@ -21,7 +24,13 @@ const users = [
   },
 ];
 
-await User.insertMany(users);
+await userModel.insertMany(users);
 console.log("All users added");
 
 dbClose();
+
+// const password = req.body.password;
+// const salt = await bcrypt.genSalt(10);
+// const hashedPassword = await bcrypt.hash(password, salt);
+
+// req.body.password = hashedPassword;
