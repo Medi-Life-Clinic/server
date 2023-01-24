@@ -50,7 +50,7 @@ router.post("/login", async (req, res) => {
         .send({ message: "User does not exist", success: false });
     }
     // Check password against database hashed password using bcrypt.compare (incoming password, database password)
-    const validPassword = await bcrypt.compare(
+    const validPassword =  await bcrypt.compare(
       req.body.password,
       user.password
     );

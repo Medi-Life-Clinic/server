@@ -21,6 +21,11 @@ const users = [
     email: "mikey@hotmail.com",
     password: "123abc",
   },
+  {
+    name: "Michael D",
+    email: "mike@hotmail.com",
+    password: "$2a$10$frmBqc83tvqAtyBW5ZvlC.GzXRGKCJmaueGKMYAoFbrHLpsBZl2sO", // PLAIN PW : "123456"
+  },
 ];
 
 await userModel.insertMany(users);

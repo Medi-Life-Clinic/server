@@ -25,4 +25,4 @@ try {
 }
 
 // Export database connection and user model
-export { dbClose, m };
+export { dbClose };
