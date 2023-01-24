@@ -30,13 +30,12 @@ router.post("/register", async (req, res) => {
     // Send a response to the client that user was created successfully
     res
       .status(200)
-      .send({ message: "User created successfully", success: true });
-  } 
-  // Catch any errors and send a response to the client
-  catch (error) {
+      .send({ message: "User created Successfully", success: true });
+  } catch (error) {
+    // Catch any errors and send a response to the client
     res
       .status(500)
-      .send({ message: "Error creating user", success: false, error });
+      .send({ message: "Error creating User", success: false, error });
   }
 });
 
@@ -63,7 +62,7 @@ router.post("/login", async (req, res) => {
     }
     // If password matches, generate a JWT token and send it to the client
     else {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {
         expiresIn: "1d", // Token expires in 1 hour ****CHANGE TO 1 HOUR BEFORE DEPLOYMENT****
       });
       // Send successful response to client with token
