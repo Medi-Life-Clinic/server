@@ -14,7 +14,7 @@ async function dbClose() {
 // Connect to database using Mongoose
 
 try {
-  const m = await mongoose.connect(process.env.MONGODB_URL);
+ const m = await mongoose.connect(process.env.MONGODB_URL);
   console.log(
     m.connection.readyState === 1
       ? "Database connection established"
@@ -25,4 +25,4 @@ try {
 }
 
 // Export database connection and user model
-export { dbClose };
+export { dbClose, m };
