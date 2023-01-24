@@ -3,12 +3,13 @@ const app = express();
 import userRoute from "./routes/user_routes.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 
 // Configuration
 dotenv.config();
 mongoose.set("strictQuery", true);
 
-// Middleware
+app.use(cors());
 app.use(express.json());
 
 // URI for user routes
