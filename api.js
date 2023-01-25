@@ -1,6 +1,7 @@
 import express from "express";
 const app = express();
 import userRoute from "./routes/user_routes.js";
+import doctorRoute from "./routes/doctor_routes.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // URI for user routes
 app.use("/api/user", userRoute);
+app.use("/api/doctor", doctorRoute);
 
 // Default route
 app.get("/", (request, response) =>
