@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 
 // Middleware to check if user is authenticated
-const authenticate = (req, res, next) => {
+export const authenticate = async (req, res, next) => {
   try {
-    // Splits the bearer and token from the authorization header
+    // Splits the token from the authorization header
     const token = req.headers["authorization"].split(" ")[1];
     // Verifies the token using the secret key
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
@@ -13,7 +13,7 @@ const authenticate = (req, res, next) => {
           success: false,
         });
       } else {
-        req.UserId = decoded.id;
+        req.body.UserId = decoded.id;
         next();
       }
     });
