@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
     // If password matches, generate a JWT token and send it to the client
     else {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: "1d", // Token expires in 1 hour ****CHANGE TO 1 HOUR BEFORE DEPLOYMENT****
+        // expiresIn: "1d", // Token expires in 1 hour ****CHANGE TO 1 HOUR BEFORE DEPLOYMENT****
       });
       // Send successful response to client with token
       res.status(200).send({

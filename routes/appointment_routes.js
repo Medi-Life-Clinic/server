@@ -19,9 +19,9 @@ router.get("/get-all", authenticate, async (req, res) => {
   }
 });
 
-router.get("/book-appointment", authenticate, async (req, res) => {
+router.post("/book-appointment", authenticate, async (req, res) => {
   try {
-    req.body.status = "pending";
+    // req.body.status = "pending";
     const newAppointment = new Appointment(req.body);
     await newAppointment.save();
     // const doctor = await Doctor.findOne({ _id: req.body.doctorId });
@@ -29,7 +29,7 @@ router.get("/book-appointment", authenticate, async (req, res) => {
     console.log(error);
     res
       .status(500)
-      .send({ message: "Error booking appointment", success: false, error });
+      .send({ message: "Error booking appointment", success: false});
   }
 });
 
