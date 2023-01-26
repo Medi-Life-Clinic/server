@@ -21,4 +21,20 @@ router.get("/get-all", authenticate,  async (req, res) => {
   }
 });
 
+
+router.post("/get-doctor-info-by-user-id", authenticate, async (req, res) => {
+  try {
+    const doctor = await Doctor.findOne({ userId: req.body.userId });
+    res.status(200).send({
+      success: true,
+      message: "Doctor info fetched successfully",
+      data: doctor,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error getting doctor", success: false, error });
+  }
+});
+
 export default router;

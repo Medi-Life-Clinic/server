@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 import userRoute from "./routes/user_routes.js";
 import doctorRoute from "./routes/doctor_routes.js";
-import appointmentRoute from "./routes/appoint_routes.js";
+import appointmentRoute from "./routes/appointment_routes.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
