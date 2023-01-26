@@ -21,6 +21,12 @@ router.post("/get-doctor-info-by-id", authenticate, async (req, res) => {
   }
 });
 
+// end point for checkAvailabilty (for booking)
+
+
+
+
+
 //below routes for testing
 
 ///

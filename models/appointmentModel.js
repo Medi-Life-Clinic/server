@@ -22,10 +22,10 @@ const appointmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    time: {
-      type: String,
-      required: true,
-    },
+    // time: {
+    //   type: String,
+    //   required: true,
+    // },
     bookingStatus: {
       type: String,
       required: true,
