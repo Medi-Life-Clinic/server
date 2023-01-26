@@ -9,8 +9,7 @@ const router = express.Router();
 
 router.post("/check-availability", authenticate, async (req, res) => {
   try {
-    const date = moment(req.body.date, "DD-MM-YYYY").toISOString();
-
+    const date = req.body.date;
     const doctorId = req.body.doctorId;
     console.log(doctorId);
 
@@ -22,11 +21,14 @@ router.post("/check-availability", authenticate, async (req, res) => {
       res.status(200).send({
         message: "Doctor is not available on this date",
         success: false,
+        length : appointments.length
       });
     } else {
       res.status(200).send({
         message: "Doctor is available on this date",
         success: true,
+        length : appointments.length,
+        date : date
       });
     }
   } catch (error) {
