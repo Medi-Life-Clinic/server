@@ -12,11 +12,11 @@ const appointmentSchema = new mongoose.Schema(
     },
     doctorInfo: {
       type: Object,
-      required: true,
+      required: false, // temp
     },
     userInfo: {
       type: Object,
-      required: true,
+      required: false, // temp
     },
     date: {
       type: String,
@@ -26,11 +26,11 @@ const appointmentSchema = new mongoose.Schema(
     //   type: String,
     //   required: true,
     // },
-    bookingStatus: {
-      type: String,
-      required: true,
-      default: "pending",
-    },
+    // bookingStatus: {
+    //   type: String,
+    //   required: true,
+    //   default: "pending",
+    // },
   },
   { timestamps: true }
 );
