@@ -36,7 +36,8 @@ router.post("/check-availability", authenticate, async (req, res) => {
   }
 });
 
-router.post("/book-appointment", async (req, res) => { // needs auth middleware
+router.post("/book-appointment", async (req, res) => {
+  // needs auth middleware
   try {
     req.body.status = "pending";
     const newAppointment = new Appointment(req.body);
@@ -57,6 +58,22 @@ router.post("/book-appointment", async (req, res) => { // needs auth middleware
 router.get("/get-all", authenticate, async (req, res) => {
   try {
     const appointments = await Appointment.find({});
+    res.status(200).send({
+      message: "All appointments list from database",
+      success: true,
+      data: appointments,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error getting appointments", success: false, error });
+  }
+});
+
+// get all appointments by user id
+router.get("/get-all-by-user-id", authenticate, async (req, res) => {
+  try {
+    const appointments = await Appointment.find({ userId: req.body.userId }); // need to send userId in body
     res.status(200).send({
       message: "All appointments list from database",
       success: true,
