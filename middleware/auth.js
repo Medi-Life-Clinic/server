@@ -20,7 +20,7 @@ export const authenticate = async (req, res, next) => {
   } catch (error) {
     res
       .status(401)
-      .send({ message: "You are not authenticated!", success: false });
+      .send({ message: "Error authenticating user", success: false });
   }
 };
 
