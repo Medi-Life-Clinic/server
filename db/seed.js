@@ -83,9 +83,3 @@ await doctorModel.insertMany(doctors);
 console.log("All doctors added");
 
 dbClose();
-
-// const password = req.body.password;
-// const salt = await bcrypt.genSalt(10);
-// const hashedPassword = await bcrypt.hash(password, salt);
-
-// req.body.password = hashedPassword;

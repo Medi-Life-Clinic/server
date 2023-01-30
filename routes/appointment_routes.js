@@ -73,7 +73,7 @@ router.get("/get-all", async (req, res) => {
 });
 
 // get all appointments by user id
-router.get("/get-all-by-user-id", async (req, res) => {
+router.post("/get-all-by-user-id", async (req, res) => {
   try {
     const appointments = await Appointment.find({ userId: req.body.userId }); // need to send userId in body
     res.status(200).send({

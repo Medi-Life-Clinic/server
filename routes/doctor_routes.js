@@ -21,10 +21,6 @@ router.post("/get-doctor-info-by-id", authenticate, async (req, res) => {
   }
 });
 
-//below routes for testing
-
-///
-///
 
 // route for all doctors (not for booking)
 router.get("/get-all", authenticate, async (req, res) => {
