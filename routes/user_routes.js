@@ -87,7 +87,9 @@ router.post("/get-all", authenticate, async (req, res) => {
   try {
     //show all users
     const users = await User.find({});
-    res.status(200).send({ message: "All users list from db", success: true, data: users });
+    res
+      .status(200)
+      .send({ message: "All users list from db", success: true, data: users });
     // const user = await User.findOne({ _id: req.body.userId });
     // if (!user) {
     //   res.status(200).send({ message: "User not found", success: false });

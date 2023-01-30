@@ -6,7 +6,7 @@ const router = express.Router();
 
 // check availability
 
-router.post("/check-availability", authenticate, async (req, res) => {
+router.post("/check-availability", async (req, res) => {
   try {
     const date = req.body.date;
     const doctorId = req.body.doctorId;
@@ -55,7 +55,7 @@ router.post("/book-appointment", async (req, res) => {
 
 ///////////////////////
 
-router.get("/get-all", authenticate, async (req, res) => {
+router.get("/get-all", async (req, res) => {
   try {
     const appointments = await Appointment.find({});
     res.status(200).send({
@@ -71,7 +71,7 @@ router.get("/get-all", authenticate, async (req, res) => {
 });
 
 // get all appointments by user id
-router.get("/get-all-by-user-id", authenticate, async (req, res) => {
+router.get("/get-all-by-user-id", async (req, res) => {
   try {
     const appointments = await Appointment.find({ userId: req.body.userId }); // need to send userId in body
     res.status(200).send({
