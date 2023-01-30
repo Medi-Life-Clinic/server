@@ -1,12 +1,15 @@
 import { dbClose } from "./db.js";
 import userModel from "../models/userModel.js";
 import doctorModel from "../models/doctorModel.js";
+import appointmentModel from "../models/appointmentModel.js";
 // import bcrypt from "bcryptjs";
 
 await userModel.deleteMany();
 await doctorModel.deleteMany();
+await appointmentModel.deleteMany();
 console.log("All users deleted");
 console.log("All doctors deleted");
+console.log("All appointments deleted");
 
 const users = [
   {
@@ -46,6 +49,8 @@ const doctors = [
       thursday: "9:00am - 5:00pm",
       friday: "9:00am - 5:00pm",
     },
+    image:
+      "https://img.freepik.com/free-photo/portrait-successful-young-doctor-with-folder-stethoscope_1262-12410.jpg?w=1380&t=st=1674710399~exp=1674710999~hmac=5239d5bf2b1f7c28c24388dc71782d33a6211a7745bdc570b822a18d013b0af0",
   },
 
   {
@@ -57,6 +62,8 @@ const doctors = [
       tuesday: "9:00am - 5:00pm",
       thursday: "9:00am - 5:00pm",
     },
+    image:
+      "https://img.freepik.com/free-photo/black-woman-with-stethoscope_1157-15563.jpg?w=1380&t=st=1674710448~exp=1674711048~hmac=0b5ec6c0daff92659ab817240d8989d35e2aa8b7a7d85d2b10e318b2862df39f",
   },
 
   {
@@ -67,6 +74,8 @@ const doctors = [
       tuesday: "9:00am - 3:00pm",
       thursday: "9:00am - 3:00pm",
     },
+    image:
+      "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg?w=1380&t=st=1674710422~exp=1674711022~hmac=ef74ba8e151b53c09f9647c55463dcd942ca1aca20cca39e3904c0203ab4d4c2",
   },
 ];
 

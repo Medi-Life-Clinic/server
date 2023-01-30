@@ -10,12 +10,14 @@ router.post("/check-availability", async (req, res) => {
   try {
     const date = req.body.date;
     const doctorId = req.body.doctorId;
-    console.log(doctorId);
+    const time = req.body.time;
 
     const appointments = await Appointment.find({
       doctorId,
       date,
+      time,
     });
+    console.log(appointments);
     if (appointments.length > 0) {
       res.status(200).send({
         message: "Doctor is not available on this date",
