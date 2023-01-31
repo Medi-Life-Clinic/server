@@ -88,4 +88,22 @@ router.post("/get-all-by-user-id", authenticate, async (req, res) => {
   }
 });
 
+// delete appointment by id
+router.post("/delete-by-id", authenticate, async (req, res) => {
+  try {
+    const appointment = await Appointment.findByIdAndDelete(req.body.id); // need to send id in body
+    res.status(200).send({
+      message: "Appointment deleted successfully",
+      success: true,
+      data: appointment,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error deleting appointment", success: false, error });
+  }
+});
+
+
+
 export default router;

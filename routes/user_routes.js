@@ -83,6 +83,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//end point for getting all users
 router.post("/get-all", authenticate, async (req, res) => {
   try {
     //show all users
@@ -90,23 +91,28 @@ router.post("/get-all", authenticate, async (req, res) => {
     res
       .status(200)
       .send({ message: "All users list from db", success: true, data: users });
-    // const user = await User.findOne({ _id: req.body.userId });
-    // if (!user) {
-    //   res.status(200).send({ message: "User not found", success: false });
-    // } else {
-    //   res.status(200).send({
-    // success: true,
-    // data: {
-    //   name: user.user,
-    //   email: user.email,
-    // },
-    //   });
-    // }
   } catch (error) {
     console.log(error);
     res
       .status(500)
       .send({ message: "Error getting user", success: false, error });
+  }
+});
+
+//end point to delete user by id
+router.post("/delete-by-id", authenticate, async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.body.id);
+    res.status(200).send({
+      message: "User deleted successfully",
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .send({ message: "Error deleting user", success: false, error });
   }
 });
 

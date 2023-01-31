@@ -11,7 +11,7 @@ const appointmentSchema = new mongoose.Schema({
   },
   doctorInfo: {
     type: Object,
-    required: true, // temp
+    required: true,
   },
   date: {
     type: String,

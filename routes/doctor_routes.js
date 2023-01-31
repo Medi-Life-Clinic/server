@@ -21,7 +21,6 @@ router.post("/get-doctor-info-by-id", authenticate, async (req, res) => {
   }
 });
 
-
 // route for all doctors (not for booking)
 router.get("/get-all", authenticate, async (req, res) => {
   try {
@@ -51,6 +50,22 @@ router.post("/get-doctor-info-by-user-id", authenticate, async (req, res) => {
     res
       .status(500)
       .send({ message: "Error getting doctor", success: false, error });
+  }
+});
+
+// delete doctor by id
+router.post("/delete-by-id", authenticate, async (req, res) => {
+  try {
+    const doctor = await Doctor.findByIdAndDelete(req.body.id);
+    res.status(200).send({
+      message: "Doctor deleted successfully",
+      success: true,
+      data: doctor,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error deleting doctor", success: false, error });
   }
 });
 
