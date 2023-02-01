@@ -22,13 +22,11 @@ router.post("/check-availability", authenticate, async (req, res) => {
       res.status(200).send({
         message: "Doctor is not available on this date",
         success: false,
-        date: date,
       });
     } else {
       res.status(200).send({
         message: "Doctor is available on this date",
         success: true,
-        date: date,
       });
     }
   } catch (error) {
@@ -39,9 +37,7 @@ router.post("/check-availability", authenticate, async (req, res) => {
 });
 
 router.post("/book-appointment", authenticate, async (req, res) => {
-  // needs auth middleware
   try {
-    req.body.status = "pending";
     const newAppointment = new Appointment(req.body);
     await newAppointment.save();
     res

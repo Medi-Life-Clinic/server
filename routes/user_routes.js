@@ -73,6 +73,7 @@ router.post("/login", async (req, res) => {
         token: token,
         user: user.name,
         userId: user._id,
+        isAdmin: user.isAdmin,
       });
     }
   } catch (error) {
@@ -84,9 +85,8 @@ router.post("/login", async (req, res) => {
 });
 
 //end point for getting all users
-router.post("/get-all", authenticate, async (req, res) => {
+router.get("/get-all", authenticate, async (req, res) => {
   try {
-    //show all users
     const users = await User.find({});
     res
       .status(200)
