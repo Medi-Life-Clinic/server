@@ -1,4 +1,4 @@
-import express from "express";
+import express, { request } from "express";
 import authenticate from "../middleware/auth.js";
 import Appointment from "../models/appointmentModel.js";
 
@@ -100,6 +100,23 @@ router.post("/delete-by-id", authenticate, async (req, res) => {
   }
 });
 
-
+// update appointment by id
+router.post("/update-by-id", authenticate, async (req, res) => {
+  try {
+    const appointment = await Appointment.findByIdAndUpdate(
+      req.body.id,
+      req.body
+    ); // need to send id in body
+    res.status(200).send({
+      message: "Appointment updated successfully",
+      success: true,
+      data: appointment,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error updating appointment", success: false, error });
+  }
+});
 
 export default router;
