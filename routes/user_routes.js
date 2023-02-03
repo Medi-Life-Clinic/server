@@ -3,40 +3,59 @@ import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import authenticate from "../middleware/auth.js";
+import adminAuth from "../middleware/admin.js";
+import { check, validationResult } from "express-validator";
 
 const router = express.Router();
-
+// Validation rules.
+const registerValidate = [
+  // Check email
+  check('email', 'Username Must Be an Email Address').isEmail().trim().escape().normalizeEmail(),
+  // Check password
+  check('password', 'Password Must Be at Least 8 Characters').isLength({ min: 8 }).trim().escape(),
+  // Check user name
+  check('name', 'Name Must Be at Least 3 Characters').isLength({ min: 3}).trim().escape()
+];
 // End point for User Registration
-router.post("/register", async (req, res) => {
-  try {
-    // Check if user already exists by email from req.body
-    const userExists = await User.findOne({ email: req.body.email });
-    // If user exists, send error message that account already exists
-    if (userExists) {
-      return res
-        .status(200)
-        .send({ message: "User already exists", success: false });
-    }
-    // If user does not exist, hash the password using bcrypt
-    const password = req.body.password;
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+router.post("/register", registerValidate, async (req, res) => {
 
-    // Makes the value of the password from req.body the hashed password
-    req.body.password = hashedPassword;
-    // Create a new user using the User model and the req.body
-    const newuser = new User(req.body);
-    // Save the new user to the database
-    await newuser.save();
-    // Send a response to the client that user was created successfully
-    res
-      .status(200)
-      .send({ message: "User created Successfully", success: true });
-  } catch (error) {
-    // Catch any errors and send a response to the client
-    res
-      .status(500)
-      .send({ message: "Error creating User", success: false, error });
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    return res
+    .status(422)
+    .send({ errors: errors.array()[0].msg, success: false })
+  } else {
+    try {
+      // Check if user already exists by email from req.body
+      const userExists = await User.findOne({ email: req.body.email });
+      // If user exists, send error message that account already exists
+      if (userExists) {
+        return res
+          .status(409)
+          .send({ message: "User already exists", success: false });
+      }
+      // If user does not exist, hash the password using bcrypt
+      const password = req.body.password;
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      // Makes the value of the password from req.body the hashed password
+      req.body.password = hashedPassword;
+      // Create a new user using the User model and the req.body
+      const newuser = new User(req.body);
+      // Save the new user to the database
+      await newuser.save();
+      // Send a response to the client that user was created successfully
+      res
+        .status(200)
+        .send({ message: "User created Successfully", success: true });
+    } catch (error) {
+      // Catch any errors and send a response to the client
+      res
+        .status(500)
+        .send({ message: "Error creating User", success: false, error });
+    }
   }
 });
 
@@ -47,7 +66,7 @@ router.post("/login", async (req, res) => {
     // If user does not exist, send error message
     if (!user) {
       return res
-        .status(200)
+        .status(208)
         .send({ message: "User does not exist", success: false });
     }
     // Check password against database hashed password using bcrypt.compare (incoming password, database password)
@@ -58,7 +77,7 @@ router.post("/login", async (req, res) => {
     // If password does not match, send error message
     if (!validPassword) {
       return res
-        .status(200)
+        .status(403)
         .send({ message: "Invalid password", success: false });
     }
     // If password matches, generate a JWT token and send it to the client
@@ -85,7 +104,7 @@ router.post("/login", async (req, res) => {
 });
 
 //end point for getting all users
-router.get("/get-all", authenticate, async (req, res) => {
+router.get("/get-all", authenticate, adminAuth, async (req, res) => {
   try {
     const users = await User.find({});
     res
@@ -100,7 +119,7 @@ router.get("/get-all", authenticate, async (req, res) => {
 });
 
 //end point to delete user by id
-router.post("/delete-by-id", authenticate, async (req, res) => {
+router.post("/delete-by-id", authenticate, adminAuth, async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.body.id);
     res.status(200).send({
