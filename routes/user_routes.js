@@ -10,19 +10,30 @@ const router = express.Router();
 // Validation rules.
 const registerValidate = [
   // Check email
-  check('email', 'Username Must Be an Email Address').isEmail().trim().escape().normalizeEmail(),
+  check("email", "Email Must Be an Email Address")
+    .isEmail()
+    .trim()
+    .escape()
+    .normalizeEmail(),
   // Check password
-  check('password', 'Password Must Be at Least 8 Characters').isLength({ min: 8 }).trim().escape()
+  check("password", "Password Must Be at Least 8 Characters")
+    .isLength({ min: 8 })
+    .trim()
+    .escape(),
+  // Check user name
+  check("name", "Name Must Be at Least 3 Characters")
+    .isLength({ min: 3 })
+    .trim()
+    .escape(),
 ];
 // End point for User Registration
 router.post("/register", registerValidate, async (req, res) => {
-
-  const errors = validationResult(req)
+  const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return res
-    .status(422)
-    .send({ errors: errors.array()[0].msg, success: false })
+      .status(422)
+      .send({ errors: errors.array()[0].msg, success: false });
   } else {
     try {
       // Check if user already exists by email from req.body
@@ -102,7 +113,7 @@ router.post("/login", async (req, res) => {
 });
 
 //end point for getting all users
-router.get("/get-all", authenticate, adminAuth, async (req, res) => {
+router.get("/get-all", authenticate, async (req, res) => {
   try {
     const users = await User.find({});
     res

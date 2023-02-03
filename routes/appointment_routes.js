@@ -1,6 +1,7 @@
 import express, { request } from "express";
 import authenticate from "../middleware/auth.js";
 import Appointment from "../models/appointmentModel.js";
+// import adminAuth from "../middleware/admin.js";
 
 const router = express.Router();
 
@@ -69,7 +70,7 @@ router.get("/get-all", authenticate,  async (req, res) => {
 });
 
 // get all appointments by user id
-router.post("/get-all-by-user-id", authenticate, async (req, res) => {
+router.get("/get-all-by-user-id", authenticate, async (req, res) => {
   try {
     const appointments = await Appointment.find({ userId: req.body.userId }); // need to send userId in body
     res.status(200).send({

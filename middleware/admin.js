@@ -3,7 +3,7 @@
 export const adminAuth = async (req, res, next) => {
   try {
     const adminCheck = req.body.isAdmin;
-    if (adminCheck) {
+    if (adminCheck == "true") {
       next();
     } else {
       res.status(403).send({

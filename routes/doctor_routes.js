@@ -4,24 +4,7 @@ import authenticate from "../middleware/auth.js";
 
 const router = express.Router();
 
-// end point for getDoctorData (for booking)
-
-router.post("/get-doctor-info-by-id", authenticate, async (req, res) => {
-  try {
-    const doctor = await Doctor.findOne({ _id: req.body._id });
-    res.status(200).send({
-      success: true,
-      message: "Doctor fetched successfully",
-      data: doctor,
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .send({ message: "Error getting doctor", success: false, error });
-  }
-});
-
-// route for all doctors (not for booking)
+// route for all doctors
 router.get("/get-all", authenticate, async (req, res) => {
   try {
     const doctors = await Doctor.find({});
@@ -37,21 +20,6 @@ router.get("/get-all", authenticate, async (req, res) => {
   }
 });
 
-// route for doctor info by doctorId (not for booking)
-router.post("/get-doctor-info-by-user-id", authenticate, async (req, res) => {
-  try {
-    const doctor = await Doctor.findOne({ _id: req.body._id }); // changed to _id from doctorId to match the request body
-    res.status(200).send({
-      success: true,
-      message: "Doctor info fetched successfully",
-      data: doctor,
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .send({ message: "Error getting doctor", success: false, error });
-  }
-});
 
 // delete doctor by id
 router.post("/delete-by-id", authenticate, async (req, res) => {
