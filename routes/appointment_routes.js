@@ -85,7 +85,7 @@ router.post("/get-all-by-user-id", authenticate, async (req, res) => {
 });
 
 // delete appointment by id
-router.delete("/delete-by-id", authenticate, async (req, res) => {
+router.delete("/delete-by-id", authenticate, adminAuth, async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndDelete(req.body.id); // need to send id in body
     res.status(200).send({
@@ -101,12 +101,12 @@ router.delete("/delete-by-id", authenticate, async (req, res) => {
 });
 
 // update appointment by id
-router.put("/update-by-id", authenticate, async (req, res) => {
+router.put("/update-by-id", authenticate, adminAuth, async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndUpdate(
       req.body.id,
       req.body
-    ); // need to send id in body
+    );
     res.status(200).send({
       message: "Appointment updated successfully",
       success: true,

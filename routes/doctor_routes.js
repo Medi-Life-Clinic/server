@@ -1,6 +1,7 @@
 import express from "express";
 import Doctor from "../models/doctorModel.js";
 import authenticate from "../middleware/auth.js";
+import adminAuth from "../middleware/admin.js";
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ router.get("/get-all", authenticate, async (req, res) => {
 });
 
 // delete doctor by id
-router.delete("/delete-by-id", authenticate, async (req, res) => {
+router.delete("/delete-by-id", authenticate, adminAuth, async (req, res) => {
   try {
     const doctor = await Doctor.findByIdAndDelete(req.body.id);
     res.status(200).send({
