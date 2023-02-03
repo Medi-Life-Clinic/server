@@ -2,7 +2,6 @@ import { dbClose } from "./db.js";
 import userModel from "../models/userModel.js";
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
-// import bcrypt from "bcryptjs";
 
 await userModel.deleteMany();
 await doctorModel.deleteMany();
@@ -70,14 +69,67 @@ const doctors = [
 await doctorModel.insertMany(doctors);
 console.log("All doctors added");
 
-// const appointments = [
-//   {
-//     doctor: doctors[0]._id,
-//     user: users[1]._id,
-//     date: "2021-08-01",
-//     time: "10:00",
-//     isConfirmed: true,
-//   },
+const appointments = [
+  {
+    "userId": "63dcdaf7d67cce5e32735adf",
+    "doctorId": "63dcdaf7d67cce5e32735ae1",
+    "doctorInfo": {
+      "_id": "63dcdaf7d67cce5e32735ae1",
+      "name": "Dr. John Doe",
+      "specialization": "Cardiologist",
+      "bio": "Dr. John Doe is a cardiologist in Toronto, Ontario and is affiliated with multiple hospitals in the area, including Humber River Hospital and St. Michael's Hospital. He received his medical degree from University of Toronto Faculty of Medicine and has been in practice for more than 20 years. He is one of 12 doctors at Humber River Hospital and one of 12 at St. Michael's Hospital who specialize in Cardiology.",
+      "image": "https://img.freepik.com/free-photo/portrait-successful-young-doctor-with-folder-stethoscope_1262-12410.jpg?w=1380&t=st=1674710399~exp=1674710999~hmac=5239d5bf2b1f7c28c24388dc71782d33a6211a7745bdc570b822a18d013b0af0",
+      "__v": 0
+    },
+    "userInfo": {
+      "name": "Michael D",
+      "email": "mike@hotmail.com"
+    },
+    "date": "22-02-2023",
+    "time": "13:00",
+    "__v": 0
+  },
+  {
+    "userId": "63dcdaf7d67cce5e32735adf",
+    "doctorId": "63dcdaf7d67cce5e32735ae2",
+    "doctorInfo": {
+      "_id": "63dcdaf7d67cce5e32735ae2",
+      "name": "Dr. Sarah Jacobs",
+      "specialization": "Dentist",
+      "bio": "Dr. Sarah Jacobs is a dentist in Toronto, Ontario and is affiliated with multiple hospitals in the area, including Humber River Hospital and St. Michael's Hospital. She received her medical degree from University of Toronto Faculty of Medicine and has been in practice for more than 20 years. She is one of 12 doctors at Humber River Hospital and one of 12 at St. Michael's Hospital who specialize in Dentistry.",
+      "image": "https://img.freepik.com/free-photo/black-woman-with-stethoscope_1157-15563.jpg?w=1380&t=st=1674710448~exp=1674711048~hmac=0b5ec6c0daff92659ab817240d8989d35e2aa8b7a7d85d2b10e318b2862df39f",
+      "__v": 0
+    },
+    "userInfo": {
+      "name": "Michael D",
+      "email": "mike@hotmail.com"
+    },
+    "date": "16-02-2023",
+    "time": "15:00",
+    "__v": 0
+  },
+  {
+    "userId": "63dcdaf7d67cce5e32735adf",
+    "doctorId": "63dcdaf7d67cce5e32735ae1",
+    "doctorInfo": {
+      "_id": "63dcdaf7d67cce5e32735ae1",
+      "name": "Dr. John Doe",
+      "specialization": "Cardiologist",
+      "bio": "Dr. John Doe is a cardiologist in Toronto, Ontario and is affiliated with multiple hospitals in the area, including Humber River Hospital and St. Michael's Hospital. He received his medical degree from University of Toronto Faculty of Medicine and has been in practice for more than 20 years. He is one of 12 doctors at Humber River Hospital and one of 12 at St. Michael's Hospital who specialize in Cardiology.",
+      "image": "https://img.freepik.com/free-photo/portrait-successful-young-doctor-with-folder-stethoscope_1262-12410.jpg?w=1380&t=st=1674710399~exp=1674710999~hmac=5239d5bf2b1f7c28c24388dc71782d33a6211a7745bdc570b822a18d013b0af0",
+      "__v": 0
+    },
+    "userInfo": {
+      "name": "Michael D",
+      "email": "mike@hotmail.com"
+    },
+    "date": "23-02-2023",
+    "time": "14:00",
+    "__v": 0
+  }
+];
+  await appointmentModel.insertMany(appointments);
+  console.log("All appointments added");
 
 
 dbClose();
