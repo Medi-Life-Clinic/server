@@ -11,7 +11,9 @@ const registerValidate = [
   // Check email
   check('email', 'Username Must Be an Email Address').isEmail().trim().escape().normalizeEmail(),
   // Check password
-  check('password', 'Password Must Be at Least 8 Characters').isLength({ min: 8 }).trim().escape()
+  check('password', 'Password Must Be at Least 8 Characters').isLength({ min: 8 }).trim().escape(),
+  // Check user name
+  check('name', 'Name Must Be at Least 3 Characters').isLength({ min: 3}).trim().escape()
 ];
 // End point for User Registration
 router.post("/register", registerValidate, async (req, res) => {
