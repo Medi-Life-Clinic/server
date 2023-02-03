@@ -3,40 +3,56 @@ import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import authenticate from "../middleware/auth.js";
+import { check, validationResult } from "express-validator";
 
 const router = express.Router();
-
+// Validation rules.
+const registerValidate = [
+  // Check email
+  check('email', 'Username Must Be an Email Address').isEmail().trim().escape().normalizeEmail().withMessage('Invalid Email Address'),
+  // Check password
+  check('password', 'Password Must Be at Least 8 Characters').isLength({ min: 8 }).trim().escape().withMessage('Invalid Password')
+];
 // End point for User Registration
-router.post("/register", async (req, res) => {
-  try {
-    // Check if user already exists by email from req.body
-    const userExists = await User.findOne({ email: req.body.email });
-    // If user exists, send error message that account already exists
-    if (userExists) {
-      return res
-        .status(200)
-        .send({ message: "User already exists", success: false });
-    }
-    // If user does not exist, hash the password using bcrypt
-    const password = req.body.password;
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+router.post("/register", registerValidate, async (req, res) => {
 
-    // Makes the value of the password from req.body the hashed password
-    req.body.password = hashedPassword;
-    // Create a new user using the User model and the req.body
-    const newuser = new User(req.body);
-    // Save the new user to the database
-    await newuser.save();
-    // Send a response to the client that user was created successfully
-    res
-      .status(200)
-      .send({ message: "User created Successfully", success: true });
-  } catch (error) {
-    // Catch any errors and send a response to the client
-    res
-      .status(500)
-      .send({ message: "Error creating User", success: false, error });
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    return res
+    .status(422)
+    .send({ errors: errors.array() })
+  } else {
+    try {
+      // Check if user already exists by email from req.body
+      const userExists = await User.findOne({ email: req.body.email });
+      // If user exists, send error message that account already exists
+      if (userExists) {
+        return res
+          .status(200)
+          .send({ message: "User already exists", success: false });
+      }
+      // If user does not exist, hash the password using bcrypt
+      const password = req.body.password;
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      // Makes the value of the password from req.body the hashed password
+      req.body.password = hashedPassword;
+      // Create a new user using the User model and the req.body
+      const newuser = new User(req.body);
+      // Save the new user to the database
+      await newuser.save();
+      // Send a response to the client that user was created successfully
+      res
+        .status(200)
+        .send({ message: "User created Successfully", success: true });
+    } catch (error) {
+      // Catch any errors and send a response to the client
+      res
+        .status(500)
+        .send({ message: "Error creating User", success: false, error });
+    }
   }
 });
 
