@@ -53,7 +53,7 @@ router.post("/book-appointment", authenticate, async (req, res) => {
 
 ///////////////////////
 
-router.get("/get-all", authenticate,  async (req, res) => {
+router.get("/get-all", authenticate, async (req, res) => {
   try {
     const appointments = await Appointment.find({});
     res.status(200).send({
@@ -85,7 +85,7 @@ router.post("/get-all-by-user-id", authenticate, async (req, res) => {
 });
 
 // delete appointment by id
-router.post("/delete-by-id", authenticate, async (req, res) => {
+router.delete("/delete-by-id", authenticate, async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndDelete(req.body.id); // need to send id in body
     res.status(200).send({

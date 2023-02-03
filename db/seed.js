@@ -30,6 +30,7 @@ const users = [
     isAdmin: false
   },
   {
+    _id: "63dd68d12f3ad22b372477a6",
     name: "Michael D",
     email: "mike@hotmail.com",
     password: "$2a$10$frmBqc83tvqAtyBW5ZvlC.GzXRGKCJmaueGKMYAoFbrHLpsBZl2sO", // PLAIN PW : "123456"
@@ -71,7 +72,7 @@ console.log("All doctors added");
 
 const appointments = [
   {
-    "userId": "63dcdaf7d67cce5e32735adf",
+    "userId": "63dd68d12f3ad22b372477a6",
     "doctorId": "63dcdaf7d67cce5e32735ae1",
     "doctorInfo": {
       "_id": "63dcdaf7d67cce5e32735ae1",
@@ -90,7 +91,7 @@ const appointments = [
     "__v": 0
   },
   {
-    "userId": "63dcdaf7d67cce5e32735adf",
+    "userId": "63dd68d12f3ad22b372477a6",
     "doctorId": "63dcdaf7d67cce5e32735ae2",
     "doctorInfo": {
       "_id": "63dcdaf7d67cce5e32735ae2",
@@ -109,7 +110,7 @@ const appointments = [
     "__v": 0
   },
   {
-    "userId": "63dcdaf7d67cce5e32735adf",
+    "userId": "63dd68d12f3ad22b372477a6",
     "doctorId": "63dcdaf7d67cce5e32735ae1",
     "doctorInfo": {
       "_id": "63dcdaf7d67cce5e32735ae1",
