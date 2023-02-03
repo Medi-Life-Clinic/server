@@ -20,9 +20,8 @@ router.get("/get-all", authenticate, async (req, res) => {
   }
 });
 
-
 // delete doctor by id
-router.post("/delete-by-id", authenticate, async (req, res) => {
+router.delete("/delete-by-id", authenticate, async (req, res) => {
   try {
     const doctor = await Doctor.findByIdAndDelete(req.body.id);
     res.status(200).send({

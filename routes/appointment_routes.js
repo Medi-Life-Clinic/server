@@ -101,7 +101,7 @@ router.post("/delete-by-id", authenticate, async (req, res) => {
 });
 
 // update appointment by id
-router.post("/update-by-id", authenticate, async (req, res) => {
+router.put("/update-by-id", authenticate, async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndUpdate(
       req.body.id,
