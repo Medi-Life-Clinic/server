@@ -70,4 +70,14 @@ const doctors = [
 await doctorModel.insertMany(doctors);
 console.log("All doctors added");
 
+// const appointments = [
+//   {
+//     doctor: doctors[0]._id,
+//     user: users[1]._id,
+//     date: "2021-08-01",
+//     time: "10:00",
+//     isConfirmed: true,
+//   },
+
+
 dbClose();

@@ -1,7 +1,7 @@
 import express, { request } from "express";
 import authenticate from "../middleware/auth.js";
 import Appointment from "../models/appointmentModel.js";
-// import adminAuth from "../middleware/admin.js";
+import adminAuth from "../middleware/admin.js";
 
 const router = express.Router();
 
@@ -45,7 +45,6 @@ router.post("/book-appointment", authenticate, async (req, res) => {
       .status(200)
       .send({ message: "Appointment booked successfully", success: true });
   } catch (error) {
-    console.log(error);
     res
       .status(500)
       .send({ message: "Error booking appointment", success: false });
@@ -70,7 +69,7 @@ router.get("/get-all", authenticate,  async (req, res) => {
 });
 
 // get all appointments by user id
-router.get("/get-all-by-user-id", authenticate, async (req, res) => {
+router.post("/get-all-by-user-id", authenticate, async (req, res) => {
   try {
     const appointments = await Appointment.find({ userId: req.body.userId }); // need to send userId in body
     res.status(200).send({
