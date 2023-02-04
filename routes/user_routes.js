@@ -6,10 +6,8 @@ import authenticate from "../middleware/auth.js";
 import adminAuth from "../middleware/admin.js";
 import { check, validationResult } from "express-validator";
 
-// const express = require('express');
 const router = express.Router();
 
-// const router = express.Router();
 // Validation rules.
 const registerValidate = [
   // Check email
