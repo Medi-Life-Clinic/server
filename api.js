@@ -21,7 +21,9 @@ app.use("/api/appointment", appointmentRoute)
 
 // Default route
 app.get("/", (request, response) =>
-  response.send({ info: "Medi-Life Clinic API" })
+  response
+  .status(200)
+  .send({ info: "Medi-Life Clinic API" })
 );
 
 // Connect to database using Mongoose

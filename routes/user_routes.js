@@ -6,7 +6,10 @@ import authenticate from "../middleware/auth.js";
 import adminAuth from "../middleware/admin.js";
 import { check, validationResult } from "express-validator";
 
+// const express = require('express');
 const router = express.Router();
+
+// const router = express.Router();
 // Validation rules.
 const registerValidate = [
   // Check email
@@ -27,7 +30,7 @@ const registerValidate = [
     .escape(),
 ];
 // End point for User Registration
-router.post("/register", registerValidate, async (req, res) => {
+router.post("/register", registerValidate, async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -144,4 +147,5 @@ router.delete("/delete-by-id", authenticate, adminAuth, async (req, res) => {
   }
 });
 
+// module.exports = router;
 export default router;
