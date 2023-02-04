@@ -1,6 +1,7 @@
 import express, { request } from "express";
 import authenticate from "../middleware/auth.js";
 import Appointment from "../models/appointmentModel.js";
+import adminAuth from "../middleware/admin.js";
 
 const router = express.Router();
 
@@ -44,7 +45,6 @@ router.post("/book-appointment", authenticate, async (req, res) => {
       .status(200)
       .send({ message: "Appointment booked successfully", success: true });
   } catch (error) {
-    console.log(error);
     res
       .status(500)
       .send({ message: "Error booking appointment", success: false });
@@ -53,7 +53,7 @@ router.post("/book-appointment", authenticate, async (req, res) => {
 
 ///////////////////////
 
-router.get("/get-all", authenticate,  async (req, res) => {
+router.get("/get-all", authenticate, async (req, res) => {
   try {
     const appointments = await Appointment.find({});
     res.status(200).send({
@@ -85,7 +85,7 @@ router.post("/get-all-by-user-id", authenticate, async (req, res) => {
 });
 
 // delete appointment by id
-router.post("/delete-by-id", authenticate, async (req, res) => {
+router.delete("/delete-by-id", authenticate, async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndDelete(req.body.id); // need to send id in body
     res.status(200).send({
@@ -101,12 +101,12 @@ router.post("/delete-by-id", authenticate, async (req, res) => {
 });
 
 // update appointment by id
-router.post("/update-by-id", authenticate, async (req, res) => {
+router.put("/update-by-id", authenticate, adminAuth, async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndUpdate(
       req.body.id,
       req.body
-    ); // need to send id in body
+    );
     res.status(200).send({
       message: "Appointment updated successfully",
       success: true,
