@@ -101,7 +101,7 @@ When first loading into the website you have the option of registering your own 
 
 ## Development Testing and Documentation
 
-Please navigate to the follow link for the full endpoint documentation showing testing throughout the development process (Example below) -  [Medi-life Clinic Server](https://documenter.getpostman.com/view/15810091/Tz5qZQ9o)
+Please navigate to the follow link for the full endpoint documentation showing testing throughout the development process (Example below) -  [Medi-life Clinic Server](https://documenter.getpostman.com/view/23778116/2s935mrQGj)
 
 <img align="center" width="100%" src="./docs/postman-docu.png">
 
